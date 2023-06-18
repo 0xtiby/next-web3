@@ -1,6 +1,6 @@
 import { Heading, Text } from "@/components/ui/text";
 
-import { Button } from "@/components/ui/button";
+import { ConnectButton } from "@/components/ConnectButton";
 import Head from "next/head";
 import { locales } from "@/locales";
 
@@ -16,7 +16,7 @@ export default function Home() {
       <main className="container py-20 space-y-12">
         <Heading>{locales.appName}</Heading>
         <Text>{locales.description}</Text>
-        <Button>{locales.connectWallet}</Button>
+        <ConnectButton />
       </main>
     </>
   );
