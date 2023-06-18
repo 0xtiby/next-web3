@@ -2,6 +2,7 @@ import { Heading, Text } from "@/components/ui/text";
 
 import { ConnectButton } from "@/components/ConnectButton";
 import Head from "next/head";
+import NftsList from "@/components/Nfts/Nfts";
 import { locales } from "@/locales";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <Heading>{locales.appName}</Heading>
         <Text>{locales.description}</Text>
         <ConnectButton />
+        <NftsList />
       </main>
     </>
   );

@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { WagmiConfig, configureChains, createConfig } from "wagmi";
 import { arbitrum, mainnet, optimism, polygon } from "wagmi/chains";
@@ -29,16 +30,22 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: false } },
+});
+
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={`${fontSans.variable}`}>
-      <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider chains={chains}>
-          <Component {...pageProps} />
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className={`${fontSans.variable}`}>
+        <WagmiConfig config={wagmiConfig}>
+          <RainbowKitProvider chains={chains}>
+            <Component {...pageProps} />
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </div>
+    </QueryClientProvider>
   );
 }
